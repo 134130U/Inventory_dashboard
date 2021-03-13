@@ -1,0 +1,33 @@
+product_type,etat,cost_price,stock_type,tenant_id,quantite,Cout Total
+Burn stove component,Neuf,0.0,multi_manager,3,8,0.0
+Burn stove component,Neuf,0.0,personal,3,31,0.0
+Fan component,Neuf,0.0,multi_manager,3,5,0.0
+Fan component,Neuf,0.0,personal,3,91,0.0
+Hairclipper component,Neuf,0.0,multi_manager,3,9,0.0
+Hairclipper component,Neuf,5501.51,multi_manager,3,1,5501.51
+Hairclipper component,Neuf,5501.51,personal,3,1,5501.51
+Hairclipper component,Neuf,19792.5,multi_manager,3,2,39585.0
+Hairclipper component,Neuf,19792.5,personal,3,1,19792.5
+Oolu TV Screen 24,Neuf,0.0,multi_manager,3,84,0.0
+Oolu TV Screen 24,Neuf,0.0,personal,3,54,0.0
+Oolu TV Screen 32,Neuf,0.0,multi_manager,3,77,0.0
+Oolu TV Screen 32,Neuf,0.0,personal,3,46,0.0
+Portable light component,Neuf,6844.78,multi_manager,3,559,3826232.02
+Portable light component,Neuf,6844.78,personal,3,218,1492162.04
+Portable light component,Neuf,9479.07,multi_manager,3,2,18958.14
+Portable light component,Neuf,9479.07,personal,3,7,66353.49
+Powerhub 1280 component,Neuf,314.0,multi_manager,3,95,29830.0
+Powerhub 1280 component,Neuf,314.0,personal,3,3,942.0
+Powerhub 500 component,Neuf,122901.62,personal,3,1,122901.62
+WowSolar Controller,Neuf,24472.68,multi_manager,3,100,2447268.0
+WowSolar Controller,Neuf,24472.68,personal,3,22,538398.96
+WowSolar Controller,Neuf,27176.46,multi_manager,3,3,81529.38
+WowSolar Controller,Neuf,30024.9,multi_manager,3,11,330273.9
+WowSolar Controller,Neuf,30024.9,personal,3,22,660547.8
+WowSolar Controller,Neuf,30265.81,multi_manager,3,8,242126.48
+WowSolar Controller,Neuf,30265.81,personal,3,2,60531.62
+WowSolar Controller,Neuf,111942.55,multi_manager,3,22,2462736.1
+WowSolar Controller,Neuf,111942.55,personal,3,11,1231368.05
+WowSolar Controller,Neuf,114005.3,personal,3,1,114005.3
+WowSolar Controller,Neuf,152865.17,multi_manager,3,2,305730.34
+WowSolar Controller,Neuf,152865.17,personal,3,2,305730.34

@@ -1,0 +1,22 @@
+product_type,etat,cost_price,stock_type,tenant_id,quantite,Cout Total
+D100 Controller,Neuf,0.0,multi_manager,1,1,0.0
+Hairclipper component,Neuf,9830.0,multi_manager,1,3,29490.0
+Hairclipper component,Neuf,9830.0,personal,1,44,432520.0
+Oolu TV Screen 24,Neuf,0.0,multi_manager,1,2,0.0
+PG TEST,Neuf,0.0,multi_manager,1,5,0.0
+PICO 40Wh Controller,Neuf,0.0,multi_manager,1,2,0.0
+Radio component,Neuf,7509.0,multi_manager,1,3,22527.0
+Radio component,Neuf,7509.0,personal,1,11,82599.0
+WowSolar Controller,Neuf,0.0,multi_manager,1,2,0.0
+WowSolar Controller,Neuf,0.0,personal,1,2,0.0
+WowSolar Controller,Neuf,31439.0,multi_manager,1,4,125756.0
+WowSolar Controller,Neuf,31439.0,personal,1,1,31439.0
+WowSolar Controller,Neuf,142394.0,multi_manager,1,1,142394.0
+WowSolar Controller,Neuf,144532.0,multi_manager,1,1,144532.0
+WowSolar Controller,Neuf,156051.0,multi_manager,1,2,312102.0
+WowSolar Controller,Neuf,156051.0,personal,1,1,156051.0
+WowSolar Controller,Neuf,162983.0,multi_manager,1,2,325966.0
+WowSolar Controller,Neuf,168410.0,multi_manager,1,14,2357740.0
+WowSolar Controller,Neuf,168410.0,personal,1,82,13809620.0
+WowSolar Controller,Neuf,225710.0,personal,1,67,15122570.0
+WowSolar TV Screen 22,Neuf,0.0,multi_manager,1,1,0.0

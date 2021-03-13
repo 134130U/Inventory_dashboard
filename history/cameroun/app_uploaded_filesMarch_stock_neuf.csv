@@ -1,0 +1,3 @@
+product_type,etat,cost_price,stock_type,tenant_id,quantite,Cout Total
+D100 Controller,Neuf,0.0,multi_manager,6,156,0.0
+D100 Controller,Neuf,0.0,personal,6,28,0.0

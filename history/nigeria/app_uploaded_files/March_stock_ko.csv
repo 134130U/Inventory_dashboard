@@ -1,0 +1,30 @@
+product_type,etat,cost_price,stock_type,tenant_id,quantite,Cout Total
+Hairclipper component,Endommagé,5501.51,multi_manager,3,1,5501.51
+Hairclipper component,Endommagé,5501.51,personal,3,2,11003.02
+Portable light component,Endommagé,6844.78,multi_manager,3,2,13689.56
+Powerhub 1000 component,Endommagé,190908.89,multi_manager,3,1,190908.89
+Powerhub 500 component,Endommagé,122901.62,multi_manager,3,4,491606.48
+WowSolar Controller,Endommagé,0.0,multi_manager,3,81,0.0
+WowSolar Controller,Endommagé,0.0,personal,3,30,0.0
+WowSolar Controller,Endommagé,24472.68,multi_manager,3,652,15956187.36
+WowSolar Controller,Endommagé,24472.68,personal,3,84,2055705.12
+WowSolar Controller,Endommagé,24473.0,personal,3,1,24473.0
+WowSolar Controller,Endommagé,27176.46,multi_manager,3,230,6250585.8
+WowSolar Controller,Endommagé,27176.46,personal,3,20,543529.2
+WowSolar Controller,Endommagé,30024.9,multi_manager,3,65,1951618.5
+WowSolar Controller,Endommagé,30024.9,personal,3,47,1411170.3
+WowSolar Controller,Endommagé,30265.81,multi_manager,3,29,877708.49
+WowSolar Controller,Endommagé,30265.81,personal,3,10,302658.1
+WowSolar Controller,Endommagé,111942.55,multi_manager,3,62,6940438.1
+WowSolar Controller,Endommagé,111942.55,personal,3,27,3022448.85
+WowSolar Controller,Endommagé,114005.3,multi_manager,3,5,570026.5
+WowSolar Controller,Endommagé,114005.3,personal,3,7,798037.1
+WowSolar Controller,Endommagé,115375.07,multi_manager,3,13,1499875.91
+WowSolar Controller,Endommagé,115375.07,personal,3,1,115375.07
+WowSolar Controller,Endommagé,116026.0,personal,3,1,116026.0
+WowSolar Controller,Endommagé,116026.06,multi_manager,3,96,11138501.76
+WowSolar Controller,Endommagé,116026.06,personal,3,14,1624364.84
+WowSolar Controller,Endommagé,138696.92,multi_manager,3,2,277393.84
+WowSolar Controller,Endommagé,144289.0,multi_manager,3,1,144289.0
+WowSolar Controller,Endommagé,152865.17,multi_manager,3,14,2140112.38
+WowSolar Controller,Endommagé,152865.17,personal,3,7,1070056.19
