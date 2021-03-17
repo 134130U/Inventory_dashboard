@@ -70,17 +70,19 @@ def download(path):
 app.layout = html.Div([
         dcc.Interval(
                 id='interval-component',
-                interval=144000, # in milliseconds
+                interval=144000*1000, # in milliseconds
                 n_intervals=0
         ),
         dbc.Row([
-            html.A([html.Img(src=app.get_asset_url('oolu.png'),
-                             id='oolu-logo',
-                             style={
-                                 "height": "60px",
-                                 "width": "auto",
-                                 "margin-bottom": "25px",
-                             }, )], href='http://212.47.246.218:8888/'),
+            dbc.Col([
+                html.A([html.Img(src=app.get_asset_url('oolu.png'),
+                                 id='oolu-logo',
+                                 style={
+                                     "height": "60px",
+                                     "width": "auto",
+                                     "margin-bottom": "25px",
+                                 }, )], href='http://212.47.246.218:8888/'),
+                ],width={'size': 2}),
             dbc.Col(html.H1('Inventaire Du Stock Senegal',
                             style={
                                 'textAlign': 'center',
@@ -150,13 +152,26 @@ app.layout = html.Div([
                                         'textAlign': 'center',
                                         'color': 'white'}
                                     ),
-                            html.P(f"{df_neuf['quantite'].sum():,.0f}",
+                            html.P(id='q_n',#f"{df_neuf['quantite'].sum():,.0f}",
                                    style={
                                        'textAlign': 'center',
                                        'color': 'green',
                                        'fontSize': 50}
                                    ),
                             ], className="card_container six columns" "offset-by-one.column"),
+                        html.Div([
+                            html.H4(children='Cout du Stock neuf',
+                                    style={
+                                        'textAlign': 'center',
+                                        'color': 'white'}
+                                    ),
+                            html.P(id='v_n',#f"{df_ko['quantite'].sum():,.0f}",
+                                   style={
+                                       'textAlign': 'center',
+                                       'color': 'green',
+                                       'fontSize': 50}
+                                   ),
+                            ], className= "card_container six columns" "offset-by-one.column"),
                     dt.DataTable(
                         id='table',
                         style_header=table_header_style,
@@ -184,13 +199,26 @@ app.layout = html.Div([
                                 'textAlign': 'center',
                                 'color': 'white'}
                             ),
-                    html.P(f"{df_ko['quantite'].sum():,.0f}",
+                    html.P(id='q_k',#f"{df_ko['quantite'].sum():,.0f}",
                            style={
                                'textAlign': 'center',
                                'color': 'red',
                                'fontSize': 50}
                            ),
                     ], className="card_container six columns" "offset-by-one.column"),
+                html.Div([
+                    html.H4(children='Cout du Stock KO',
+                            style={
+                                'textAlign': 'center',
+                                'color': 'white'}
+                            ),
+                    html.P(id='v_k',#f"{df_ko['quantite'].sum():,.0f}",
+                           style={
+                               'textAlign': 'center',
+                               'color': 'red',
+                               'fontSize': 50}
+                           ),
+                    ], className= "card_container six columns" "offset-by-one.column"),
                 dt.DataTable(
                     id='table2',
                     style_header=table_header_style,
@@ -205,11 +233,34 @@ app.layout = html.Div([
             ],width={'size': 5,'offset':0},
             )
         ]),
-
         html.Div(
             id='update-connection'
         )
 ])
+
+
+@app.callback(
+    Output('q_n', 'children'),
+    Output('v_n', 'children'),
+    Output('q_k', 'children'),
+    Output('v_k', 'children'),
+    [Input('product', 'value'),
+     Input('stock', 'value')])
+def update_table(select_product,select_stock):
+    if not select_product and not select_stock:
+        return f"{df_neuf['quantite'].sum():,.0f}   ",f"{df_neuf['Cout Total'].sum():,.0f} CFA" , f"{df_ko['quantite'].sum():,.0f} ", f"{df_ko['Cout Total'].sum():,.2f} CFA"
+    elif select_product and not select_stock:
+        tab1 = df_neuf[df_neuf['product_type'].isin(select_product)]
+        tab2 = df_ko[df_ko['product_type'].isin(select_product)]
+        return f"{tab1['quantite'].sum():,.0f} ",f"{tab1['Cout Total'].sum():,.0f}  CFA", f"{tab2['quantite'].sum():,.0f} ", f"{tab2['Cout Total'].sum():,.2f} CFA"
+    elif select_stock and not select_product:
+        tab1 = df_neuf[df_neuf['stock_type'].isin(select_stock)]
+        tab2 = df_ko[df_ko['stock_type'].isin(select_stock)]
+        return f"{tab1['quantite'].sum():,.0f} ", f"{tab1['Cout Total'].sum():,.0f} CFA", f"{tab2['quantite'].sum():,.0f}" , f"{tab2['Cout Total'].sum():,.2f}  CFA"
+    else:
+        tab1 = df_neuf[df_neuf['product_type'].isin(select_product) & df_neuf['stock_type'].isin(select_stock)]
+        tab2 = df_ko[df_ko['product_type'].isin(select_product) & df_ko['stock_type'].isin(select_stock)]
+        return f"{tab1['quantite'].sum():,.0f} ", f"{tab1['Cout Total'].sum():,.0f}  CFA" , f"{tab2['quantite'].sum():,.0f} ", f"{tab2['Cout Total'].sum():,.2f}  CFA"
 
 
 @app.callback(
@@ -247,6 +298,7 @@ def update_connection(n):
         print('data have been updated')
 
         return ''
+
 
 
 if __name__ == '__main__':

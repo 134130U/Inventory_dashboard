@@ -23,6 +23,7 @@ def get_data():
 
     data = pd.read_sql_query(sql_text, connection)
     data.to_csv('data/inventory.csv', index=False)
+    print('data updated')
     cursor.close()
     connection.close()
 

@@ -1,5 +1,6 @@
 import pandas as pd
 import numpy as np
+import math as mt
 import dash
 import dash_bootstrap_components as dbc
 import dash_core_components as dcc
@@ -24,17 +25,21 @@ UPLOAD_DIRECTORY = "history/nigeria/app_uploaded_files"
 if not os.path.exists(UPLOAD_DIRECTORY):
     os.makedirs(UPLOAD_DIRECTORY)
 
+collect.get_data()
 
 df = pd.read_csv('data/inventory.csv')
-df['cost_price'] = df['cost_price'].round(2)
+df['cost_price'] = df['cost_price'].apply(lambda x: np.round(x,3))
 df = df[df['country']=='Nigeria']
 df.fillna(0,inplace=True)
 print(df.head())
 print(df.columns)
 df_1 = df.groupby(['product_type','etat','cost_price', 'stock_type'],as_index=False).sum({'quantite':'sum'})
+df_1['cost_price'] = df_1['cost_price'].round(2)
 df_final = df_1.copy()
 df_final = df_final[(df_final['etat'] =='Endommagé')|(df_final['etat'] =='Neuf')]
-df_final['Cout Total'] = (df_final['quantite']*df_final['cost_price']).round(2)
+df_final['Cout Total'] = df_final['quantite']*df_final['cost_price'].round(2)
+df_final['Cout Total'] = df_final['Cout Total'].round(2)
+print(df_final['cost_price'].dtypes)
 # df_final.rename(columns={'serial':'Quantite'},inplace=True)
 
 df_ko = df_final[df_final['etat'] =='Endommagé']
@@ -54,6 +59,7 @@ def job2():
 
 
 job2()
+
 
 tabel_colunm = ['product_type','etat','cost_price','quantite','Cout Total']
 
@@ -83,12 +89,12 @@ app.layout = html.Div([
         dbc.Row([
             dbc.Col([
                 html.A([html.Img(src=app.get_asset_url('oolu.png'),
-                         id='oolu-logo',
-                         style={
-                             "height": "60px",
-                             "width": "auto",
-                             "margin-bottom": "25px",
-                         },)],href='http://212.47.246.218:8888/'),
+                                 id='oolu-logo',
+                                 style={
+                                     "height": "60px",
+                                     "width": "auto",
+                                     "margin-bottom": "25px",
+                                 }, )], href='http://212.47.246.218:8888/'),
                 ],width={'size': 2}),
             dbc.Col(html.H1('Inventaire Du Stock Nigeria',
                             style={
@@ -159,13 +165,26 @@ app.layout = html.Div([
                                         'textAlign': 'center',
                                         'color': 'white'}
                                     ),
-                            html.P(f"{df_neuf['quantite'].sum():,.0f}",
+                            html.P(id='q_n',#f"{df_neuf['quantite'].sum():,.0f}",
                                    style={
                                        'textAlign': 'center',
                                        'color': 'green',
                                        'fontSize': 50}
                                    ),
                             ], className="card_container six columns" "offset-by-one.column"),
+                        html.Div([
+                            html.H4(children='Cost of Stock neuf',
+                                    style={
+                                        'textAlign': 'center',
+                                        'color': 'white'}
+                                    ),
+                            html.P(id='v_n',#f"{df_ko['quantite'].sum():,.0f}",
+                                   style={
+                                       'textAlign': 'center',
+                                       'color': 'green',
+                                       'fontSize': 50}
+                                   ),
+                            ], className= "card_container six columns" "offset-by-one.column"),
                     dt.DataTable(
                         id='table',
                         style_header=table_header_style,
@@ -193,13 +212,26 @@ app.layout = html.Div([
                                 'textAlign': 'center',
                                 'color': 'white'}
                             ),
-                    html.P(f"{df_ko['quantite'].sum():,.0f}",
+                    html.P(id='q_k',#f"{df_ko['quantite'].sum():,.0f}",
                            style={
                                'textAlign': 'center',
                                'color': 'red',
                                'fontSize': 50}
                            ),
                     ], className="card_container six columns" "offset-by-one.column"),
+                html.Div([
+                    html.H4(children='Cost of Stock KO',
+                            style={
+                                'textAlign': 'center',
+                                'color': 'white'}
+                            ),
+                    html.P(id='v_k',#f"{df_ko['quantite'].sum():,.0f}",
+                           style={
+                               'textAlign': 'center',
+                               'color': 'red',
+                               'fontSize': 50}
+                           ),
+                    ], className= "card_container six columns" "offset-by-one.column"),
                 dt.DataTable(
                     id='table2',
                     style_header=table_header_style,
@@ -214,11 +246,34 @@ app.layout = html.Div([
             ],width={'size': 5,'offset':0},
             )
         ]),
-
         html.Div(
             id='update-connection'
         )
 ])
+
+
+@app.callback(
+    Output('q_n', 'children'),
+    Output('v_n', 'children'),
+    Output('q_k', 'children'),
+    Output('v_k', 'children'),
+    [Input('product', 'value'),
+     Input('stock', 'value')])
+def update_table(select_product,select_stock):
+    if not select_product and not select_stock:
+        return f"{df_neuf['quantite'].sum():,.0f}   ",f"{df_neuf['Cout Total'].sum():,.0f}   Naira" , f"{df_ko['quantite'].sum():,.0f} ", f"{df_ko['Cout Total'].sum():,.2f}   Naira"
+    elif select_product and not select_stock:
+        tab1 = df_neuf[df_neuf['product_type'].isin(select_product)]
+        tab2 = df_ko[df_ko['product_type'].isin(select_product)]
+        return f"{tab1['quantite'].sum():,.0f} ",f"{tab1['Cout Total'].sum():,.0f}    Naira", f"{tab2['quantite'].sum():,.0f} ", f"{tab2['Cout Total'].sum():,.2f}   Naira"
+    elif select_stock and not select_product:
+        tab1 = df_neuf[df_neuf['stock_type'].isin(select_stock)]
+        tab2 = df_ko[df_ko['stock_type'].isin(select_stock)]
+        return f"{tab1['quantite'].sum():,.0f} ", f"{tab1['Cout Total'].sum():,.0f}   Naira", f"{tab2['quantite'].sum():,.0f}" , f"{tab2['Cout Total'].sum():,.2f}   Naira"
+    else:
+        tab1 = df_neuf[df_neuf['product_type'].isin(select_product) & df_neuf['stock_type'].isin(select_stock)]
+        tab2 = df_ko[df_ko['product_type'].isin(select_product) & df_ko['stock_type'].isin(select_stock)]
+        return f"{tab1['quantite'].sum():,.0f} ", f"{tab1['Cout Total'].sum():,.0f}  Naira" , f"{tab2['quantite'].sum():,.0f} ", f"{tab2['Cout Total'].sum():,.2f}  Naira"
 
 
 @app.callback(
@@ -249,12 +304,6 @@ def update_table(select_product,select_stock):
     Output('update-connection', 'children'),
     Input('interval-component', 'n_intervals'))
 def update_connection(n):
-    global connection
-    global cursor
-    global sql_text
-    global sql_file
-    global data
-    global record
 
     if n > 0:
         collect.get_data()

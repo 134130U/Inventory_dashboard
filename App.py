@@ -70,7 +70,7 @@ sidebar = html.Div(
 )
 
 fig1 = px.sunburst(data, path=['country','etat'], values='quantite',
-                  color='etat',width=400, height=350)
+                  color='etat',width=600, height=500)
 fig1.update_layout(
     margin=dict(l=20, r=20, t=20, b=20),
     paper_bgcolor='#1f2c56',)
@@ -187,4 +187,4 @@ app.layout = html.Div([dcc.Location(id="url"), sidebar, content])
 
 
 if __name__ == "__main__":
-    app.run_server(port=8888,dev_tools_ui=False, debug=True)
+    app.run_server(debug=True,dev_tools_ui=False, host='0.0.0.0', port=8888)

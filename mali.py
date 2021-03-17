@@ -24,27 +24,7 @@ UPLOAD_DIRECTORY = "history/mali/app_uploaded_files"
 if not os.path.exists(UPLOAD_DIRECTORY):
     os.makedirs(UPLOAD_DIRECTORY)
 
-sql_file = open('data/inventory.sql')
-sql_text = sql_file.read()
-# Connection to oolusolar database
-try:
-    connection = psycopg2.connect(user = 'chartio_read_only_user',
-                                  password = '2ZVF01USUWTKV3K9JJFY',
-                                  host = 'oolu-main-postgresql.cfa4plgxjs0u.eu-central-1.rds.amazonaws.com',
-                                  port ='5432',
-                                  database = 'oolusolar_analytics')
-    cursor = connection.cursor()
-    cursor.execute("SELECT version();")
-    record = cursor.fetchone()
-    print('You are Successfully connected to - ',record, '\n')
-except (Exception, Error) as error:
-    print(" Connection failed, try again", error)
-    cursor.close()
 
-data  = pd.read_sql_query(sql_text , connection)
-data.to_csv('data/inventory.csv',index= False)
-cursor.close()
-connection.close()
 
 df = pd.read_csv('data/inventory.csv')
 df['cost_price'] = df['cost_price'].round(2)
@@ -61,6 +41,7 @@ df_final['Cout Total'] = (df_final['quantite']*df_final['cost_price']).round(2)
 df_ko = df_final[df_final['etat'] =='Endommagé']
 df_neuf = df_final[df_final['etat'] =='Neuf']
 
+
 def job2():
     yesterday = date.today() - timedelta(days=1)
     if int(date.today().day) == 1:
@@ -71,6 +52,10 @@ def job2():
         df_neuf.to_csv(neuf,index = False)
         print('Files successfully downloaded')
         return ''
+
+
+job2()
+
 
 tabel_colunm = ['product_type','etat','cost_price','quantite','Cout Total']
 
@@ -176,13 +161,26 @@ app.layout = html.Div([
                                         'textAlign': 'center',
                                         'color': 'white'}
                                     ),
-                            html.P(f"{df_neuf['quantite'].sum():,.0f}",
+                            html.P(id='q_n',#f"{df_neuf['quantite'].sum():,.0f}",
                                    style={
                                        'textAlign': 'center',
                                        'color': 'green',
                                        'fontSize': 50}
                                    ),
                             ], className="card_container six columns" "offset-by-one.column"),
+                        html.Div([
+                            html.H4(children='Cout du Stock neuf',
+                                    style={
+                                        'textAlign': 'center',
+                                        'color': 'white'}
+                                    ),
+                            html.P(id='v_n',#f"{df_ko['quantite'].sum():,.0f}",
+                                   style={
+                                       'textAlign': 'center',
+                                       'color': 'green',
+                                       'fontSize': 50}
+                                   ),
+                            ], className= "card_container six columns" "offset-by-one.column"),
                     dt.DataTable(
                         id='table',
                         style_header=table_header_style,
@@ -210,13 +208,26 @@ app.layout = html.Div([
                                 'textAlign': 'center',
                                 'color': 'white'}
                             ),
-                    html.P(f"{df_ko['quantite'].sum():,.0f}",
+                    html.P(id='q_k',#f"{df_ko['quantite'].sum():,.0f}",
                            style={
                                'textAlign': 'center',
                                'color': 'red',
                                'fontSize': 50}
                            ),
                     ], className="card_container six columns" "offset-by-one.column"),
+                html.Div([
+                    html.H4(children='Cout du Stock KO',
+                            style={
+                                'textAlign': 'center',
+                                'color': 'white'}
+                            ),
+                    html.P(id='v_k',#f"{df_ko['quantite'].sum():,.0f}",
+                           style={
+                               'textAlign': 'center',
+                               'color': 'red',
+                               'fontSize': 50}
+                           ),
+                    ], className= "card_container six columns" "offset-by-one.column"),
                 dt.DataTable(
                     id='table2',
                     style_header=table_header_style,
@@ -235,6 +246,30 @@ app.layout = html.Div([
             id='update-connection'
         )
 ])
+
+
+@app.callback(
+    Output('q_n', 'children'),
+    Output('v_n', 'children'),
+    Output('q_k', 'children'),
+    Output('v_k', 'children'),
+    [Input('product', 'value'),
+     Input('stock', 'value')])
+def update_table(select_product,select_stock):
+    if not select_product and not select_stock:
+        return f"{df_neuf['quantite'].sum():,.0f}   ",f"{df_neuf['Cout Total'].sum():,.0f} CFA" , f"{df_ko['quantite'].sum():,.0f} ", f"{df_ko['Cout Total'].sum():,.2f} CFA"
+    elif select_product and not select_stock:
+        tab1 = df_neuf[df_neuf['product_type'].isin(select_product)]
+        tab2 = df_ko[df_ko['product_type'].isin(select_product)]
+        return f"{tab1['quantite'].sum():,.0f} ",f"{tab1['Cout Total'].sum():,.0f}  CFA", f"{tab2['quantite'].sum():,.0f} ", f"{tab2['Cout Total'].sum():,.2f} CFA"
+    elif select_stock and not select_product:
+        tab1 = df_neuf[df_neuf['stock_type'].isin(select_stock)]
+        tab2 = df_ko[df_ko['stock_type'].isin(select_stock)]
+        return f"{tab1['quantite'].sum():,.0f} ", f"{tab1['Cout Total'].sum():,.0f} CFA", f"{tab2['quantite'].sum():,.0f}" , f"{tab2['Cout Total'].sum():,.2f}  CFA"
+    else:
+        tab1 = df_neuf[df_neuf['product_type'].isin(select_product) & df_neuf['stock_type'].isin(select_stock)]
+        tab2 = df_ko[df_ko['product_type'].isin(select_product) & df_ko['stock_type'].isin(select_stock)]
+        return f"{tab1['quantite'].sum():,.0f} ", f"{tab1['Cout Total'].sum():,.0f}  CFA" , f"{tab2['quantite'].sum():,.0f} ", f"{tab2['Cout Total'].sum():,.2f}  CFA"
 
 
 @app.callback(
@@ -272,6 +307,7 @@ def update_connection(n):
         print('data have been updated')
 
         return ''
+
 
 
 if __name__ == '__main__':

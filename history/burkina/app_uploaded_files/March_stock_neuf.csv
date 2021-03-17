@@ -1,0 +1,16 @@
+product_type,etat,cost_price,stock_type,tenant_id,quantite,Cout Total
+Hairclipper component,Neuf,10965.0,multi_manager,4,4,43860.0
+Hairclipper component,Neuf,10965.0,personal,4,45,493425.0
+Radio component,Neuf,6357.0,multi_manager,4,8,50856.0
+Radio component,Neuf,6357.0,personal,4,57,362349.0
+WowSolar Controller,Neuf,0.0,multi_manager,4,126,0.0
+WowSolar Controller,Neuf,0.0,personal,4,14,0.0
+WowSolar Controller,Neuf,29846.0,multi_manager,4,22,656612.0
+WowSolar Controller,Neuf,29846.0,personal,4,82,2447372.0
+WowSolar Controller,Neuf,146079.0,personal,4,4,584316.0
+WowSolar Controller,Neuf,147047.0,multi_manager,4,12,1764564.0
+WowSolar Controller,Neuf,147047.0,personal,4,25,3676175.0
+WowSolar Controller,Neuf,164640.0,multi_manager,4,75,12348000.0
+WowSolar Controller,Neuf,164640.0,personal,4,19,3128160.0
+WowSolar Controller,Neuf,165962.0,personal,4,1,165962.0
+WowSolar Controller,Neuf,197072.0,multi_manager,4,1,197072.0
