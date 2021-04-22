@@ -11,7 +11,7 @@ case when b.tenant_id = 1 then 'Senegal'
     else  'others' end as country
 from public.stocks_products
 inner join (select * from public.products)a on product_id = a.id
-inner join (select * from public.stocks)b on stock_id = b.id
+inner join (select * from public.stocks where deleted is false and name not like 'vincenzo capogna - agent.test'and name not like 'ZZZ%'and name not like 'XXX%' and name not like 'YYY%' )b on stock_id = b.id
 inner join(select id as id_loc,name as locality,type_locality from public.localities)c on locality_id = c.id_loc
 inner join(select * from public.product_types)d on product_type_id = d.id
 inner join (select * from product_hashes)ph on ph.serial_number = a.serial)tab

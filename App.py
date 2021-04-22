@@ -6,8 +6,16 @@ import dash_core_components as dcc
 import dash_html_components as html
 from dash.dependencies import Input, Output
 import collect
-
 import plotly.express as px
+from apscheduler.schedulers.background import BackgroundScheduler
+import senegal,mali,nigeria,niger,burkina,cameroun
+
+collect.get_data()
+
+scheduler = BackgroundScheduler()
+scheduler.add_job(func=collect.get_data, trigger="interval", minutes=180)
+scheduler.start()
+
 
 
 data = pd.read_csv('data/inventory.csv')
@@ -96,7 +104,7 @@ content = html.Div([
                                     'color': 'white'
                                     }),
                             width={'size': 4, 'offset': 4}, ),
-                        dbc.Col(html.P('Last update  :  ' f'{date.today()}',
+                        dbc.Col(html.P(id ='refresh' ,children='Last update  :  ' f'{date.today()}',
                                style={
                                        'textAlign': 'right',
                                        'color': 'orange',
@@ -168,20 +176,18 @@ content = html.Div([
 ])
 @app.callback(
     Output('update-connection', 'children'),
+    Output('refresh', 'children'),
     Input('interval-component', 'n_intervals'))
 def update_connection(n):
-    global connection
-    global cursor
-    global sql_text
-    global sql_file
     global data
-    global record
 
     if n > 0:
+        data = pd.read_csv('data/inventory.csv')
         collect.get_data()
         print('data have been updated')
 
         return ''
+
 
 app.layout = html.Div([dcc.Location(id="url"), sidebar, content])
 

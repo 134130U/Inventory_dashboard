@@ -24,7 +24,6 @@ UPLOAD_DIRECTORY = "history/cameroun/app_uploaded_files"
 if not os.path.exists(UPLOAD_DIRECTORY):
     os.makedirs(UPLOAD_DIRECTORY)
 
-
 df = pd.read_csv('data/inventory.csv')
 df['cost_price'] = df['cost_price'].round(2)
 df = df[df['country']=='Cameroun']
@@ -92,7 +91,7 @@ app.layout = html.Div([
                                 'color': 'white'
                                 }),
                 width={'size': 5, 'offset': 3}, ),
-            dbc.Col(html.P('Last update  :  ' f'{date.today()}',
+            dbc.Col(html.P(id ='refresh' ,children='Last update  :  ' f'{date.today()}',
                            style={
                                    'textAlign': 'right',
                                    'color': 'orange',
@@ -292,10 +291,31 @@ def update_table(select_product,select_stock):
 
 @app.callback(
     Output('update-connection', 'children'),
+    Output('refresh', 'children'),
     Input('interval-component', 'n_intervals'))
 def update_connection(n):
+    global df
+    global df_1
+    global df_final
+    global df_ko
+    global df_neuf
 
-    if n > 0:
+    if n >0:
+        df = pd.read_csv('data/inventory.csv')
+        df['cost_price'] = df['cost_price'].round(2)
+        df = df[df['country'] == 'Cameroun']
+        df.fillna(0, inplace=True)
+        print(df.head())
+        print(df.columns)
+        df_1 = df.groupby(['product_type', 'etat', 'cost_price', 'stock_type'], as_index=False).sum({'quantite': 'sum'})
+        df_final = df_1.copy()
+        df_final = df_final[(df_final['etat'] == 'Endommagé') | (df_final['etat'] == 'Neuf')]
+        df_final['Cout Total'] = (df_final['quantite'] * df_final['cost_price']).round(2)
+        # df_final.rename(columns={'serial':'Quantite'},inplace=True)
+
+        df_ko = df_final[df_final['etat'] == 'Endommagé']
+        df_neuf = df_final[df_final['etat'] == 'Neuf']
+
         collect.get_data()
         job2()
         print('data have been updated')
