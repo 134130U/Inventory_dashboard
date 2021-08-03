@@ -15,6 +15,8 @@ import dash
 import dash_html_components as html
 from app_test import telechargement
 import collect
+from apscheduler.schedulers.background import BackgroundScheduler
+
 
 tl = telechargement('cameroun')
 
@@ -32,11 +34,11 @@ print(df.head())
 print(df.columns)
 df_1 = df.groupby(['product_type','etat','cost_price', 'stock_type'],as_index=False).sum({'quantite':'sum'})
 df_final = df_1.copy()
-df_final = df_final[(df_final['etat'] =='Endommagé')|(df_final['etat'] =='Neuf')]
+df_final = df_final[(df_final['etat'] =='waste')|(df_final['etat'] =='Neuf')]
 df_final['Cout Total'] = (df_final['quantite']*df_final['cost_price']).round(2)
 # df_final.rename(columns={'serial':'Quantite'},inplace=True)
 
-df_ko = df_final[df_final['etat'] =='Endommagé']
+df_ko = df_final[df_final['etat'] =='waste']
 df_neuf = df_final[df_final['etat'] =='Neuf']
 
 def job2():
@@ -49,6 +51,13 @@ def job2():
         df_neuf.to_csv(neuf,index = False)
         print('Files successfully downloaded')
         return ''
+
+job2()
+
+scheduler = BackgroundScheduler(daemon=True)
+scheduler.add_job(func=collect.get_data, trigger="interval", minutes=60)
+scheduler.add_job(func=job2, trigger="interval", minutes=7200)
+scheduler.start()
 
 tabel_colunm = ['product_type','etat','cost_price','quantite','Cout Total']
 
@@ -309,15 +318,22 @@ def update_connection(n):
         print(df.columns)
         df_1 = df.groupby(['product_type', 'etat', 'cost_price', 'stock_type'], as_index=False).sum({'quantite': 'sum'})
         df_final = df_1.copy()
-        df_final = df_final[(df_final['etat'] == 'Endommagé') | (df_final['etat'] == 'Neuf')]
+        df_final = df_final[(df_final['etat'] == 'waste') | (df_final['etat'] == 'Neuf')]
         df_final['Cout Total'] = (df_final['quantite'] * df_final['cost_price']).round(2)
         # df_final.rename(columns={'serial':'Quantite'},inplace=True)
 
-        df_ko = df_final[df_final['etat'] == 'Endommagé']
+        df_ko = df_final[df_final['etat'] == 'waste']
         df_neuf = df_final[df_final['etat'] == 'Neuf']
 
         collect.get_data()
-        job2()
+        yesterday = date.today() - timedelta(days=1)
+        if int(date.today().day) == 1:
+            ko = UPLOAD_DIRECTORY + '/' + yesterday.strftime('%B') + '_stock_ko.csv'
+            neuf = UPLOAD_DIRECTORY + '/' + yesterday.strftime('%B') + '_stock_neuf.csv'
+
+            df_ko.to_csv(ko, index=False)
+            df_neuf.to_csv(neuf, index=False)
+        # job2()
         print('data have been updated')
 
         return ''

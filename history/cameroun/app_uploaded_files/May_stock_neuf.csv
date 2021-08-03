@@ -1,0 +1,7 @@
+product_type,etat,cost_price,country,tenant_id,stock_type,quantite,Cout Total
+D100 Controller,Neuf,45800.0,Cameroun,6,multi_manager,94,4305200.0
+D100 Controller,Neuf,45800.0,Cameroun,6,personal,39,1786200.0
+Oolu TV Screen 24,Neuf,262227.0,Cameroun,6,multi_manager,9,2360043.0
+Oolu TV Screen 24,Neuf,262227.0,Cameroun,6,personal,3,786681.0
+Oolu TV Screen 32,Neuf,278117.0,Cameroun,6,multi_manager,28,7787276.0
+Oolu TV Screen 32,Neuf,278117.0,Cameroun,6,personal,2,556234.0

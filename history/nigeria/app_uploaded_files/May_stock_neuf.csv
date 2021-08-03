@@ -1,0 +1,24 @@
+product_type,etat,cost_price,stock_type,tenant_id,quantite,Cout Total
+Oolu TV Screen 24,Neuf,130760.0,multi_manager,3,101,13206760.0
+Oolu TV Screen 24,Neuf,130760.0,personal,3,65,8499400.0
+Oolu TV Screen 24,Neuf,262227.0,multi_manager,3,1,262227.0
+Oolu TV Screen 32,Neuf,130760.0,multi_manager,3,2,261520.0
+Oolu TV Screen 32,Neuf,137804.0,multi_manager,3,27,3720708.0
+Oolu TV Screen 32,Neuf,137804.0,personal,3,22,3031688.0
+Portable light component,Neuf,6844.78,multi_manager,3,470,3217046.6
+Portable light component,Neuf,6844.78,personal,3,273,1868624.94
+Portable light component,Neuf,9479.07,multi_manager,3,1,9479.07
+Portable light component,Neuf,9479.07,personal,3,7,66353.49
+Powerbank component,Neuf,0.0,multi_manager,3,20,0.0
+Powerhub 1280 component,Neuf,301232.0,multi_manager,3,74,22291168.0
+Powerhub 1280 component,Neuf,301232.0,personal,3,10,3012320.0
+Powerhub 500 component,Neuf,122901.62,personal,3,1,122901.62
+WowSolar Controller,Neuf,0.0,multi_manager,3,301,0.0
+WowSolar Controller,Neuf,0.0,personal,3,98,0.0
+WowSolar Controller,Neuf,24472.68,multi_manager,3,6,146836.08
+WowSolar Controller,Neuf,24472.68,personal,3,17,416035.56
+WowSolar Controller,Neuf,30024.9,personal,3,16,480398.4
+WowSolar Controller,Neuf,30265.81,multi_manager,3,2,60531.62
+WowSolar Controller,Neuf,30265.81,personal,3,1,30265.81
+WowSolar Controller,Neuf,111942.55,personal,3,10,1119425.5
+WowSolar Controller,Neuf,152865.17,personal,3,2,305730.34

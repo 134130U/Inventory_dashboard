@@ -1,0 +1,12 @@
+product_type,etat,cost_price,country,tenant_id,stock_type,quantite,Cout Total
+D100 Controller,Neuf,45800.0,Senegal,1,multi_manager,1,45800.0
+Oolu TV Screen 24,Neuf,0.0,Senegal,1,multi_manager,3,0.0
+PG TEST,Neuf,0.0,Senegal,1,multi_manager,5,0.0
+PICO 40Wh Controller,Neuf,0.0,Senegal,1,multi_manager,2,0.0
+WowSolar Controller,Neuf,0.0,Senegal,1,multi_manager,537,0.0
+WowSolar Controller,Neuf,0.0,Senegal,1,personal,844,0.0
+WowSolar Controller,Neuf,31439.0,Senegal,1,multi_manager,1,31439.0
+WowSolar Controller,Neuf,31439.0,Senegal,1,personal,1,31439.0
+WowSolar Controller,Neuf,172932.0,Senegal,1,multi_manager,9,1556388.0
+WowSolar Controller,Neuf,172932.0,Senegal,1,personal,33,5706756.0
+WowSolar Controller,Neuf,231771.0,Senegal,1,personal,1,231771.0

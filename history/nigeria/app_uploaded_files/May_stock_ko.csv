@@ -1,0 +1,28 @@
+product_type,etat,cost_price,stock_type,tenant_id,quantite,Cout Total
+Oolu TV Screen 32,Endommagé,137804.0,personal,3,1,137804.0
+Portable light component,Endommagé,6844.78,multi_manager,3,2,13689.56
+Powerhub 1000 component,Endommagé,190908.89,multi_manager,3,1,190908.89
+Powerhub 500 component,Endommagé,122901.62,multi_manager,3,4,491606.48
+WowSolar Controller,Endommagé,0.0,multi_manager,3,90,0.0
+WowSolar Controller,Endommagé,0.0,personal,3,19,0.0
+WowSolar Controller,Endommagé,24472.68,multi_manager,3,630,15417788.4
+WowSolar Controller,Endommagé,24472.68,personal,3,47,1150215.96
+WowSolar Controller,Endommagé,24473.0,personal,3,1,24473.0
+WowSolar Controller,Endommagé,27176.46,multi_manager,3,197,5353762.62
+WowSolar Controller,Endommagé,27176.46,personal,3,14,380470.44
+WowSolar Controller,Endommagé,30024.9,multi_manager,3,92,2762290.8
+WowSolar Controller,Endommagé,30024.9,personal,3,20,600498.0
+WowSolar Controller,Endommagé,30265.81,multi_manager,3,29,877708.49
+WowSolar Controller,Endommagé,30265.81,personal,3,5,151329.05
+WowSolar Controller,Endommagé,111942.55,multi_manager,3,72,8059863.6
+WowSolar Controller,Endommagé,111942.55,personal,3,9,1007482.95
+WowSolar Controller,Endommagé,114005.3,multi_manager,3,8,912042.4
+WowSolar Controller,Endommagé,114005.3,personal,3,5,570026.5
+WowSolar Controller,Endommagé,115375.07,multi_manager,3,12,1384500.84
+WowSolar Controller,Endommagé,116026.0,personal,3,1,116026.0
+WowSolar Controller,Endommagé,116026.06,multi_manager,3,69,8005798.14
+WowSolar Controller,Endommagé,116026.06,personal,3,5,580130.3
+WowSolar Controller,Endommagé,138696.92,multi_manager,3,2,277393.84
+WowSolar Controller,Endommagé,144289.0,multi_manager,3,1,144289.0
+WowSolar Controller,Endommagé,152865.17,multi_manager,3,20,3057303.4
+WowSolar Controller,Endommagé,152865.17,personal,3,1,152865.17

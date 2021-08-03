@@ -1,0 +1,14 @@
+product_type,etat,cost_price,country,tenant_id,stock_type,quantite,Cout Total
+SKH Controller,Neuf,37707.47966,Mali,2,personal,1,37707.48
+WowSolar Controller,Neuf,0.0,Mali,2,multi_manager,193,0.0
+WowSolar Controller,Neuf,0.0,Mali,2,personal,69,0.0
+WowSolar Controller,Neuf,29514.0,Mali,2,multi_manager,2,59028.0
+WowSolar Controller,Neuf,29514.0,Mali,2,personal,14,413196.0
+WowSolar Controller,Neuf,30684.0,Mali,2,personal,1,30684.0
+WowSolar Controller,Neuf,32216.0,Mali,2,multi_manager,1093,35212088.0
+WowSolar Controller,Neuf,32216.0,Mali,2,personal,531,17106696.0
+WowSolar Controller,Neuf,145780.0,Mali,2,personal,7,1020460.0
+WowSolar Controller,Neuf,147739.0,Mali,2,personal,2,295478.0
+WowSolar Controller,Neuf,158013.0,Mali,2,multi_manager,110,17381430.0
+WowSolar Controller,Neuf,158013.0,Mali,2,personal,145,22911885.0
+WowSolar Controller,Neuf,215182.0,Mali,2,personal,1,215182.0

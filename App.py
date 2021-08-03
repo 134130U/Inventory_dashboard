@@ -7,14 +7,14 @@ import dash_html_components as html
 from dash.dependencies import Input, Output
 import collect
 import plotly.express as px
-from apscheduler.schedulers.background import BackgroundScheduler
-import senegal,mali,nigeria,niger,burkina,cameroun
-
-collect.get_data()
-
-scheduler = BackgroundScheduler()
-scheduler.add_job(func=collect.get_data, trigger="interval", minutes=180)
-scheduler.start()
+# from apscheduler.schedulers.background import BackgroundScheduler
+# # import senegal,mali,nigeria,niger,burkina,cameroun
+# #
+# # collect.get_data()
+# #
+# # scheduler = BackgroundScheduler()
+# # scheduler.add_job(func=collect.get_data, trigger="interval", minutes=180)
+# # scheduler.start()
 
 
 
@@ -148,7 +148,7 @@ content = html.Div([
                             'textAlign': 'center',
                             'color': 'white'}
                         ),
-                html.P(f"{data['quantite'][data['etat'] =='Endommagé'].sum():,.0f}",
+                html.P(f"{data['quantite'][data['etat'] =='waste'].sum():,.0f}",
                        style={
                            'textAlign': 'center',
                            'color': 'red',
@@ -183,7 +183,7 @@ def update_connection(n):
 
     if n > 0:
         data = pd.read_csv('data/inventory.csv')
-        collect.get_data()
+        # collect.get_data()
         print('data have been updated')
 
         return ''
